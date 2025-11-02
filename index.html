@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Personal Fitness Coach</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1>💪 Your Personal Fitness Coach</h1>
+                <div class="header-info">
+                    <span id="currentDate"></span>
+                    <span class="location">📍 Rajkot, Gujarat</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <button class="nav-btn active" data-section="dashboard">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </button>
+            <button class="nav-btn" data-section="workout">
+                <span class="nav-icon">🏋️</span>
+                <span>Workout</span>
+            </button>
+            <button class="nav-btn" data-section="nutrition">
+                <span class="nav-icon">🍽️</span>
+                <span>Nutrition</span>
+            </button>
+            <button class="nav-btn" data-section="water">
+                <span class="nav-icon">💧</span>
+                <span>Water</span>
+            </button>
+            <button class="nav-btn" data-section="progress">
+                <span class="nav-icon">📈</span>
+                <span>Progress</span>
+            </button>
+            <button class="nav-btn" data-section="schedule">
+                <span class="nav-icon">📅</span>
+                <span>Schedule</span>
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <div class="welcome-card">
+                    <h2>Welcome Back! 🌟</h2>
+                    <p class="motivational-quote" id="dailyQuote"></p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">💧</div>
+                        <div class="stat-info">
+                            <h3>Water Today</h3>
+                            <p class="stat-value"><span id="dashWaterGlasses">0</span>/10 glasses</p>
+                            <div class="mini-progress">
+                                <div class="mini-progress-bar" id="dashWaterProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">🔥</div>
+                        <div class="stat-info">
+                            <h3>Calories Today</h3>
+                            <p class="stat-value"><span id="dashCalories">0</span>/2100 kcal</p>
+                            <div class="mini-progress">
+                                <div class="mini-progress-bar" id="dashCalProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">💪</div>
+                        <div class="stat-info">
+                            <h3>Protein Today</h3>
+                            <p class="stat-value"><span id="dashProtein">0</span>/110g</p>
+                            <div class="mini-progress">
+                                <div class="mini-progress-bar" id="dashProteinProgress"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <h3>Workout Status</h3>
+                            <p class="stat-value" id="dashWorkout">Not Started</p>
+                            <p class="stat-detail" id="todayWorkoutType"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="checklist-card">
+                    <h3>Daily Checklist</h3>
+                    <div class="checklist">
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-meditation">
+                            <span>Morning Meditation (5 min)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-yoga">
+                            <span>Yoga/Warm-up (30 min)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-workout">
+                            <span>Main Workout (40 min)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-kegel">
+                            <span>Kegel Exercises (10 min)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-water">
+                            <span>Water Target (3.5L)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-protein">
+                            <span>Protein Target (110g)</span>
+                        </label>
+                        <label class="checklist-item">
+                            <input type="checkbox" id="check-sleep">
+                            <span>Sleep 7-8 hours</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="progress-overview">
+                    <h3>Your Transformation Journey</h3>
+                    <div class="journey-stats">
+                        <div class="journey-item">
+                            <span class="journey-label">Current Weight</span>
+                            <span class="journey-value">69 kg</span>
+                        </div>
+                        <div class="journey-item">
+                            <span class="journey-label">Target Weight</span>
+                            <span class="journey-value">68 kg</span>
+                        </div>
+                        <div class="journey-item">
+                            <span class="journey-label">Streak</span>
+                            <span class="journey-value" id="currentStreak">0 days 🔥</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="motivation-card">
+                    <h3>🌟 Your Coach Says:</h3>
+                    <div id="coachMessage" class="coach-message"></div>
+                </div>
+            </section>
+
+            <!-- Workout Section -->
+            <section id="workout" class="section">
+                <div class="section-header">
+                    <h2>Today's Workout</h2>
+                    <div class="workout-day" id="workoutDay"></div>
+                </div>
+
+                <div class="timer-card" id="timerCard">
+                    <h3>Exercise Timer</h3>
+                    <div class="timer-display" id="timerDisplay">00:00</div>
+                    <div class="timer-controls">
+                        <button class="btn btn--secondary" id="timerStart">Start</button>
+                        <button class="btn btn--secondary" id="timerPause">Pause</button>
+                        <button class="btn btn--secondary" id="timerReset">Reset</button>
+                    </div>
+                    <div class="timer-presets">
+                        <button class="btn btn--sm" onclick="setTimer(45)">45s</button>
+                        <button class="btn btn--sm" onclick="setTimer(60)">60s</button>
+                        <button class="btn btn--sm" onclick="setTimer(300)">5 min</button>
+                    </div>
+                </div>
+
+                <div id="workoutExercises" class="exercise-list"></div>
+
+                <div class="workout-notes">
+                    <h3>Workout Notes</h3>
+                    <textarea id="workoutNotes" placeholder="How did you feel? Any difficulties? Notes for next time..."></textarea>
+                </div>
+
+                <button class="btn btn--primary btn--full-width" id="completeWorkout">✅ Complete Today's Workout</button>
+            </section>
+
+            <!-- Nutrition Section -->
+            <section id="nutrition" class="section">
+                <div class="section-header">
+                    <h2>Nutrition Tracker</h2>
+                    <div class="nutrition-summary">
+                        <div class="nutrition-stat">
+                            <span class="label">Calories:</span>
+                            <span class="value" id="totalCalories">0</span>/2100
+                        </div>
+                        <div class="nutrition-stat">
+                            <span class="label">Protein:</span>
+                            <span class="value" id="totalProtein">0</span>/110g
+                        </div>
+                        <div class="nutrition-stat">
+                            <span class="label">Carbs:</span>
+                            <span class="value" id="totalCarbs">0</span>g
+                        </div>
+                        <div class="nutrition-stat">
+                            <span class="label">Fat:</span>
+                            <span class="value" id="totalFat">0</span>g
+                        </div>
+                    </div>
+                </div>
+
+                <div class="progress-bars">
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span>Calories</span>
+                            <span id="calPercentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="calProgress"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-label">
+                            <span>Protein</span>
+                            <span id="proteinPercentage">0%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="proteinProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meals-container">
+                    <div class="meal-section">
+                        <h3>🌅 Breakfast</h3>
+                        <div class="add-food">
+                            <select class="form-control" id="breakfast-food">
+                                <option value="">Select food item...</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="addFood('breakfast')">Add</button>
+                        </div>
+                        <div id="breakfast-list" class="food-list"></div>
+                    </div>
+
+                    <div class="meal-section">
+                        <h3>🌞 Lunch</h3>
+                        <div class="add-food">
+                            <select class="form-control" id="lunch-food">
+                                <option value="">Select food item...</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="addFood('lunch')">Add</button>
+                        </div>
+                        <div id="lunch-list" class="food-list"></div>
+                    </div>
+
+                    <div class="meal-section">
+                        <h3>🍪 Snacks</h3>
+                        <div class="add-food">
+                            <select class="form-control" id="snacks-food">
+                                <option value="">Select food item...</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="addFood('snacks')">Add</button>
+                        </div>
+                        <div id="snacks-list" class="food-list"></div>
+                    </div>
+
+                    <div class="meal-section">
+                        <h3>🌙 Dinner</h3>
+                        <div class="add-food">
+                            <select class="form-control" id="dinner-food">
+                                <option value="">Select food item...</option>
+                            </select>
+                            <button class="btn btn--primary" onclick="addFood('dinner')">Add</button>
+                        </div>
+                        <div id="dinner-list" class="food-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Water Section -->
+            <section id="water" class="section">
+                <div class="section-header">
+                    <h2>Water Tracker</h2>
+                    <p>Target: 10 glasses (3500ml) per day</p>
+                </div>
+
+                <div class="water-stats">
+                    <div class="water-stat-card">
+                        <h3><span id="waterGlassCount">0</span>/10</h3>
+                        <p>Glasses</p>
+                    </div>
+                    <div class="water-stat-card">
+                        <h3><span id="waterMlCount">0</span>ml</h3>
+                        <p>Total Today</p>
+                    </div>
+                    <div class="water-stat-card">
+                        <h3><span id="waterRemaining">3500</span>ml</h3>
+                        <p>Remaining</p>
+                    </div>
+                </div>
+
+                <div class="water-glasses">
+                    <div class="glass" onclick="toggleWaterGlass(0)"><div class="glass-fill"></div><span>1</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(1)"><div class="glass-fill"></div><span>2</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(2)"><div class="glass-fill"></div><span>3</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(3)"><div class="glass-fill"></div><span>4</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(4)"><div class="glass-fill"></div><span>5</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(5)"><div class="glass-fill"></div><span>6</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(6)"><div class="glass-fill"></div><span>7</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(7)"><div class="glass-fill"></div><span>8</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(8)"><div class="glass-fill"></div><span>9</span></div>
+                    <div class="glass" onclick="toggleWaterGlass(9)"><div class="glass-fill"></div><span>10</span></div>
+                </div>
+
+                <div class="next-reminder">
+                    <h3>⏰ Next Water Reminder</h3>
+                    <p id="nextWaterReminder"></p>
+                </div>
+
+                <div class="water-reminders-list">
+                    <h3>Today's Water Schedule</h3>
+                    <div id="waterRemindersList"></div>
+                </div>
+            </section>
+
+            <!-- Progress Section -->
+            <section id="progress" class="section">
+                <div class="section-header">
+                    <h2>Progress Tracker</h2>
+                </div>
+
+                <div class="measurement-form">
+                    <h3>Record Weekly Measurements</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Weight (kg)</label>
+                            <input type="number" class="form-control" id="input-weight" step="0.1" value="69">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Waist (inches)</label>
+                            <input type="number" class="form-control" id="input-waist" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Chest (inches)</label>
+                            <input type="number" class="form-control" id="input-chest" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Arms (inches)</label>
+                            <input type="number" class="form-control" id="input-arms" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Thighs (inches)</label>
+                            <input type="number" class="form-control" id="input-thighs" step="0.1">
+                        </div>
+                    </div>
+                    <button class="btn btn--primary" onclick="saveMeasurements()">Save Measurements</button>
+                </div>
+
+                <div class="measurements-history">
+                    <h3>Measurement History</h3>
+                    <div id="measurementsList"></div>
+                </div>
+
+                <div class="achievements">
+                    <h3>🏆 Achievements</h3>
+                    <div class="achievement-grid" id="achievementsList"></div>
+                </div>
+            </section>
+
+            <!-- Schedule Section -->
+            <section id="schedule" class="section">
+                <div class="section-header">
+                    <h2>Daily Schedule</h2>
+                    <p>Your complete routine for transformation</p>
+                </div>
+
+                <div class="schedule-timeline" id="scheduleTimeline"></div>
+
+                <div class="weekly-schedule">
+                    <h3>Weekly Workout Plan</h3>
+                    <div class="week-grid">
+                        <div class="day-card">
+                            <h4>Monday</h4>
+                            <p>Full Body Workout</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Tuesday</h4>
+                            <p>Yoga + Light Cardio</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Wednesday</h4>
+                            <p>Full Body Workout</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Thursday</h4>
+                            <p>Yoga + Swimming</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Friday</h4>
+                            <p>Full Body Workout</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Saturday</h4>
+                            <p>Full Body + Swimming</p>
+                        </div>
+                        <div class="day-card">
+                            <h4>Sunday</h4>
+                            <p>Rest Day (Light Yoga)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Floating Reminder Badge -->
+        <div class="reminder-float" id="reminderFloat">
+            <div class="reminder-icon">🔔</div>
+            <div class="reminder-text" id="reminderText"></div>
+        </div>
+    </div>
+
+    <!-- Celebration Modal -->
+    <div class="modal" id="celebrationModal">
+        <div class="modal-content celebration">
+            <h2>🎉 Amazing Work!</h2>
+            <p id="celebrationMessage"></p>
+            <button class="btn btn--primary" onclick="closeCelebration()">Thank You! 💪</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
